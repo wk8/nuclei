@@ -254,6 +254,7 @@ func (request *Request) MakeResultEventItem(wrapped *output.InternalWrappedEvent
 		ExtractedResults: wrapped.OperatorsResult.OutputExtracts,
 		Timestamp:        time.Now(),
 		MatcherStatus:    true,
+		Error:            types.ToString(wrapped.InternalEvent["error"]),
 	}
 	return data
 }

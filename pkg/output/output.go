@@ -141,6 +141,8 @@ type ResultEvent struct {
 	IP string `json:"ip,omitempty"`
 	// Timestamp is the time the result was found at.
 	Timestamp time.Time `json:"timestamp"`
+	// Error is the error found in the result if any.
+	Error string `json:"error,omitempty"`
 	// Interaction is the full details of interactsh interaction.
 	Interaction *server.Interaction `json:"interaction,omitempty"`
 	// CURLCommand is an optional curl command to reproduce the request
@@ -344,6 +346,7 @@ func (w *StandardWriter) WriteFailure(wrappedEvent *InternalWrappedEvent) error 
 		Response:      types.ToString(event["response"]),
 		MatcherStatus: false,
 		Timestamp:     time.Now(),
+		Error:         types.ToString(event["error"]),
 	}
 	return w.Write(data)
 }

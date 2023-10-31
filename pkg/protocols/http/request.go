@@ -669,6 +669,7 @@ func (request *Request) executeRequest(input *contextargs.Context, generatedRequ
 				outputEvent["ip"] = httpclientpool.Dialer.GetDialedIP(hostname)
 			}
 
+			outputEvent["error"] = err.Error()
 			event := &output.InternalWrappedEvent{InternalEvent: outputEvent}
 			if request.CompiledOperators != nil {
 				event.InternalEvent = outputEvent
@@ -813,6 +814,7 @@ func (request *Request) executeRequest(input *contextargs.Context, generatedRequ
 		isResponseTruncated := request.MaxSize > 0 && len(gotData) >= request.MaxSize
 		dumpResponse(event, request, response.fullResponse, formedURL, responseContentType, isResponseTruncated, input.MetaInput.Input)
 
+		outputEvent["error"] = err.Error()
 		callback(event)
 
 		// Skip further responses if we have stop-at-first-match and a match

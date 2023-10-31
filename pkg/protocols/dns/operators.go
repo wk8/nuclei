@@ -122,6 +122,7 @@ func (request *Request) MakeResultEventItem(wrapped *output.InternalWrappedEvent
 		Timestamp:        time.Now(),
 		Request:          types.ToString(wrapped.InternalEvent["request"]),
 		Response:         types.ToString(wrapped.InternalEvent["raw"]),
+		Error:            types.ToString(wrapped.InternalEvent["error"]),
 	}
 	return data
 }
